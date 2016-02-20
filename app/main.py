@@ -1,7 +1,6 @@
 import bottle
 import math
 import os
-import numpy as np
 
 SNAKE = 1
 WALL = 2
@@ -24,6 +23,22 @@ def closest(items, start):
             closest_distance = item_distance
 
     return closest_item
+
+def build_grid(data):
+    grid = [[0 for col in xrange(data["width"])] for row in data["height"]]
+    for snek in data["snakes"]:
+        if snek["id "]== mysnake:
+            mysnake = snek
+        for coord in snek["coords"]:
+            grid[coord[0]][coord[1]] = SNAKE
+    for wall in data["walls"]:
+        grid[wall[0]][wall[1]] = WALL
+    for g in data["gold"]:
+        grid[g[0]][g[1]] = GOLD
+    for f in data["food"]:
+        grid[f[0]][f[1]] = FOOD
+
+    return mysnake, grid
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -91,22 +106,10 @@ def start():
 @bottle.post('/move')
 def move():
     mysnakeid = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
-    mysnake = []
-    previouspos = []
     data = bottle.request.json
 
-    grid = [[0 for col in range(data.width)] for row in data.height]
-    for snek in data.snakes:
-        if snek.id = mysnake:
-            mysnake = snek
-        for coord in snek.coords:
-            grid[coord[0]][coord[1]] = SNAKE
-    for wall in data.walls:
-        grid[wall[0]][wall[1]] = WALL
-    for g in data.gold:
-        grid[g[0]][g[1]] = GOLD
-    for f in data.food:
-        grid[f[0]][f[1]] = FOOD
+    snek, grid = build_grid(data)
+    closest_goal = closest(data["food"] + data["gold"])
 
     return {
         'move': 'north',
