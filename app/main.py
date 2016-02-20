@@ -17,7 +17,7 @@ def direction(from_cell, to_cell):
         return 'east'
     elif dx == -1:
         return 'west'
-    elif dy == -11:
+    elif dy == -1:
         return 'north'
     elif dy == 1:
         return 'south'
