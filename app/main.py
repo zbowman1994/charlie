@@ -1,7 +1,7 @@
 import bottle
 import math
 import os
-
+ID = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
 SNAKE = 1
 WALL = 2
 FOOD = 3
@@ -25,9 +25,9 @@ def closest(items, start):
     return closest_item
 
 def build_grid(data):
-    grid = [[0 for col in xrange(data["width"])] for row in xrange(data["height"]]
+    grid = [[0 for col in xrange(data["width"])] for row in xrange(data["height"])]
     for snek in data["snakes"]:
-        if snek["id "]== mysnake:
+        if snek["id"]== ID:
             mysnake = snek 
         for coord in snek["coords"]:
             grid[coord[0]][coord[1]] = SNAKE
@@ -105,7 +105,6 @@ def start():
 
 @bottle.post('/move')
 def move():
-    mysnakeid = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
     data = bottle.request.json
 
     snek, grid = build_grid(data)
