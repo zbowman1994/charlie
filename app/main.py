@@ -67,7 +67,9 @@ def start():
 
 @bottle.post('/move')
 def move():
+    mysnake = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
     data = bottle.request.json
+    
     i = np.random.randint(4)
     # TODO: Do things with data
     list = {0:'north',1:'east',2:'south',3:'west'}
