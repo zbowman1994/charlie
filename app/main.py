@@ -1,4 +1,5 @@
 import bottle
+import math
 import os
 import numpy as np
 
@@ -6,6 +7,23 @@ SNAKE = 1
 WALL = 2
 FOOD = 3
 GOLD = 4
+
+def distance(p, q):
+    dx = p[0] - q[0]
+    dy = p[1] - q[1]
+    return dx + dy;
+
+def closest(items, start):
+    closest_item = None
+    closest_distance = 10000
+
+    for item in items:
+        item_distance = distance(start, item)
+        if item_distance < closest_distance:
+            closest_item = item
+            closest_distance = item_distance
+
+    return closest_item
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -76,6 +94,7 @@ def move():
     mysnake = []
     previouspos = []
     data = bottle.request.json
+
     grid = [[0 for col in range(data.width)] for row in data.height]
     for snek in data.snakes:
         if snek.id = mysnake:
@@ -88,7 +107,6 @@ def move():
         grid[g[0]][g[1]] = GOLD
     for f in data.food:
         grid[f[0]][f[1]] = FOOD
-    
 
     return {
         'move': 'north',
