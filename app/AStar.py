@@ -1,6 +1,7 @@
-def dist(a, b):
-    return abs((a[0] - b[0]) + (a[1] - b[1]))
-
+def dist(p, q):
+    dx = abs(p[0] - q[0])
+    dy = abs(p[1] - q[1])
+    return dx + dy;
 
 def reconstruct_path(came_from, current):
     total_path = [current]

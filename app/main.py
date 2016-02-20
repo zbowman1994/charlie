@@ -1,3 +1,4 @@
+from AStar import a_star
 import bottle
 import math
 import os
@@ -7,6 +8,19 @@ SNAKE = 1
 WALL = 2
 FOOD = 3
 GOLD = 4
+
+def direction(from_cell, to_cell):
+    dx = to_cell[0] - from_cell[0]
+    dy = to_cell[1] - from_cell[1]
+
+    if dx == 1:
+        return 'east'
+    elif dx == -1:
+        return 'west'
+    elif dy == 1:
+        return 'north'
+    elif dy == -1:
+        return 'south'
 
 def distance(p, q):
     dx = abs(p[0] - q[0])
@@ -112,8 +126,12 @@ def move():
     snek_head = snek['coords'][0]
     closest_goal = closest(data['food'] + data['gold'], snek_head)
 
+    path = a_star(snek_head, closest_goal, grid)
+
+    assert path[0] == snek_head
+
     return {
-        'move': 'north',
+        'move': direction(path[0], path[1]),
         'taunt': 'TRAITOR!'
     }
 
