@@ -1,6 +1,6 @@
 import bottle
 import os
-
+import numpy as np
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -30,11 +30,10 @@ def start():
         'taunt': 'battlesnake-python!'
     }
 
-i = 0
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
+    i = np.random.randint(4)
     # TODO: Do things with data
     list = {0:'north',1:'east',2:'south',3:'west'}
     i = (i+1)%4
