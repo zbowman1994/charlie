@@ -129,7 +129,7 @@ def move():
 
     path = a_star(tuple(snek_head), tuple(closest_goal), grid)
 
-    assert path[0] == snek_head
+    assert path[0] == tuple(snek_head)
 
     return {
         'move': direction(path[0], path[1]),
