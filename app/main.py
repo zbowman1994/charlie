@@ -127,7 +127,7 @@ def move():
     snek_head = snek['coords'][0]
     closest_goal = closest(data['food'] + data['gold'], snek_head)
 
-    path = a_star(touple(snek_head), touple(closest_goal), grid)
+    path = a_star(tuple(snek_head), tuple(closest_goal), grid)
 
     assert path[0] == snek_head
 
