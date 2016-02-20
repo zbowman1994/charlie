@@ -27,14 +27,18 @@ def neighbours(node, grid):
     return result
 
 def a_star(start, goal, grid):
+    print start
+    print goal
+    print grid
+
     closed_set = []
     open_set   = [start]
     came_from = {} #empty map
 
-    g_score = [[10000 for x in range(len(grid[y]))] for y in range(len(grid))]
+    g_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     g_score[start[0]][start[1]] = 0
 
-    f_score = [[10000 for x in range(len(grid[y]))] for y in range(len(grid))]
+    f_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     f_score[start[0]][start[1]] = dist(start,goal)
 
     while(len(open_set) > 0):
@@ -59,6 +63,7 @@ def a_star(start, goal, grid):
             g_score[neighbour[0]][neighbour[1]] = tentative_g_score
             f_score[neighbour[0]][neighbour[1]] = tentative_g_score + dist(neighbour,goal)
 
+    print 'A* fail'
     return None
 
 
