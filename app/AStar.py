@@ -1,3 +1,9 @@
+def printg(grid, name):
+    print '%s: [' % name
+    for row in grid:
+        print row
+    print ']'
+
 def dist(p, q):
     dx = abs(p[0] - q[0])
     dy = abs(p[1] - q[1])
@@ -29,7 +35,7 @@ def neighbours(node, grid):
 def a_star(start, goal, grid):
     print start
     print goal
-    print grid
+    printg(grid, 'input')
 
     closed_set = []
     open_set   = [start]
@@ -38,8 +44,12 @@ def a_star(start, goal, grid):
     g_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     g_score[start[0]][start[1]] = 0
 
+    printg(g_score, 'g_score')
+
     f_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     f_score[start[0]][start[1]] = dist(start,goal)
+
+    printg(f_score, 'f_score')
 
     while(len(open_set) > 0):
         current = min(open_set, key=lambda p: f_score[p[0]][p[1]])
