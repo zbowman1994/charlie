@@ -22,7 +22,7 @@ def neighbours(node, grid, score, tail):
 
     subtail = []
     if score >= len(tail):
-        subtail = tail
+        subtail = [tuple(x) for x in tail]
     else:
         subtail = [tuple(x) for x in tail[len(tail)-score-1:]]
 
@@ -37,6 +37,7 @@ def neighbours(node, grid, score, tail):
         result.append((node[0],node[1]+1))
 
     result = filter(lambda p: (grid[p[0]][p[1]] not in [1,2]) or (p in subtail), result)
+
     return result
 
 def a_star(start, goal, grid, tail):
@@ -77,5 +78,5 @@ def a_star(start, goal, grid, tail):
 
     return None
 
-#print a_star((3,1),(1,0),[[0,2,0,0],[0,2,0,0],[1,2,0,0],[0,2,0,0]], [[3,1],[2,1],[1,1],[0,1]])
+#print a_star((3,1),(0,1),[[0,2,0,0],[0,2,0,0],[1,2,0,0],[0,2,0,0]], [[3,1],[2,1],[1,1],[0,1]])
 #print a_star((0,4),(3,4),[[0,2,0,0,2,0],[0,2,0,1,2,2],[0,2,2,2,2,2],[0,0,1,0,0,0]],[[0,4],[1,4],[1,5],[2,5],[2,4],[2,3],[2,2],[2,1],[1,1],[1,0]])
