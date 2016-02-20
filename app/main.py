@@ -134,6 +134,7 @@ def move():
         if not path:
             print "no path to food"
             continue
+        print snek['coords'][-1]
         foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid)
         if foodtotail:
             break
