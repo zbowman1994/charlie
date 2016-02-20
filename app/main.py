@@ -17,9 +17,9 @@ def direction(from_cell, to_cell):
         return 'east'
     elif dx == -1:
         return 'west'
-    elif dy == 1:
+    elif dy == -11:
         return 'north'
-    elif dy == -1:
+    elif dy == 1:
         return 'south'
 
 def distance(p, q):
