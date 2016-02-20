@@ -107,6 +107,7 @@ def start():
 
 @bottle.post('/move')
 def move():
+    print 'move'
     data = bottle.request.json
 
     snek, grid = init(data)
