@@ -53,6 +53,9 @@ def a_star(start, goal, grid):
 
     while(len(open_set) > 0):
         current = min(open_set, key=lambda p: f_score[p[0]][p[1]])
+        print 'current'
+        print current
+        print f_score[current[0]][current[1]]
 
         if (current == goal):
             return reconstruct_path(came_from, goal)
@@ -72,6 +75,9 @@ def a_star(start, goal, grid):
             came_from[neighbour] = current
             g_score[neighbour[0]][neighbour[1]] = tentative_g_score
             f_score[neighbour[0]][neighbour[1]] = tentative_g_score + dist(neighbour,goal)
+
+        printg(g_score, 'g_score')
+        printg(f_score, 'f_score')
 
     print 'A* fail'
     return None
