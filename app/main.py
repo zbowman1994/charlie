@@ -134,7 +134,6 @@ def move():
     assert path[0] == tuple(snek_head)
 
 
-    goaltotail = a_star(tuple(closest_goal),)
 
 
     return {

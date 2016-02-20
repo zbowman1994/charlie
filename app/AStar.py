@@ -76,8 +76,8 @@ def a_star(start, goal, grid):
             g_score[neighbour[0]][neighbour[1]] = tentative_g_score
             f_score[neighbour[0]][neighbour[1]] = tentative_g_score + dist(neighbour,goal)
 
-        printg(g_score, 'g_score')
-        printg(f_score, 'f_score')
+        # printg(g_score, 'g_score')
+        # printg(f_score, 'f_score')
 
     print 'A* fail'
     return None
