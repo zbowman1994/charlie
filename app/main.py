@@ -1,6 +1,7 @@
 import bottle
 import math
 import os
+
 ID = 'de508402-17c8-4ac7-ab0b-f96cb53fbee8'
 SNAKE = 1
 WALL = 2
@@ -8,10 +9,11 @@ FOOD = 3
 GOLD = 4
 
 def distance(p, q):
-    return 1
-    #dx = p[0] - q[0]
-    #dy = p[1] - q[1]
-    #return dx + dy;
+    print p
+    print q
+    dx = p[0] - q[0]
+    dy = p[1] - q[1]
+    return dx + dy;
 
 def closest(items, start):
     print items
@@ -108,7 +110,6 @@ def start():
 
 @bottle.post('/move')
 def move():
-    print 'move'
     data = bottle.request.json
 
     snek, grid = init(data)
