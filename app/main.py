@@ -31,6 +31,7 @@ def closest(items, start):
     closest_item = None
     closest_distance = 10000
 
+    # TODO: use builtin min for speed up
     for item in items:
         item_distance = distance(start, item)
         if item_distance < closest_distance:
