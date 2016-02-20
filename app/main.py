@@ -1,7 +1,7 @@
 import bottle
 import math
 import os
-ID = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
+ID = 'de508402-17c8-4ac7-ab0b-f96cb53fbee8'
 SNAKE = 1
 WALL = 2
 FOOD = 3
@@ -13,6 +13,8 @@ def distance(p, q):
     return dx + dy;
 
 def closest(items, start):
+    print items
+    print start
     closest_item = None
     closest_distance = 10000
 
@@ -24,18 +26,18 @@ def closest(items, start):
 
     return closest_item
 
-def build_grid(data):
-    grid = [[0 for col in xrange(data["width"])] for row in xrange(data["height"])]
-    for snek in data["snakes"]:
-        if snek["id"]== ID:
-            mysnake = snek 
-        for coord in snek["coords"]:
+def init(data):
+    grid = [[0 for col in xrange(data['width'])] for row in xrange(data['height'])]
+    for snek in data['snakes']:
+        if snek['id']== ID:
+            mysnake = snek
+        for coord in snek['coords']:
             grid[coord[0]][coord[1]] = SNAKE
-    for wall in data["walls"]:
+    for wall in data['walls']:
         grid[wall[0]][wall[1]] = WALL
-    for g in data["gold"]:
+    for g in data['gold']:
         grid[g[0]][g[1]] = GOLD
-    for f in data["food"]:
+    for f in data['food']:
         grid[f[0]][f[1]] = FOOD
 
     return mysnake, grid
@@ -107,8 +109,9 @@ def start():
 def move():
     data = bottle.request.json
 
-    snek, grid = build_grid(data)
-    closest_goal = closest(data["food"] + data["gold"],snek)
+    snek, grid = init(data)
+    snek_head = snek['coords'][0]
+    closest_goal = closest(data['food'] + data['gold'], snek_head)
 
     return {
         'move': 'north',
