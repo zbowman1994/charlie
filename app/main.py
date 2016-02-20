@@ -126,10 +126,16 @@ def move():
     snek, grid = init(data)
     snek_head = snek['coords'][0]
     closest_goal = closest(data['food'] + data['gold'], snek_head)
-    
-    food = sorted(data['food']+data['gold'],key = lambda p: distance(p,snek_head))
-    print food
-    path = a_star(tuple(snek_head), tuple(closest_goal), grid)
+    path = None
+    foods = sorted(data['food']+data['gold'],key = lambda p: distance(p,snek_head))
+    for food in foods:
+        path = a_star(tuple(snek_head), tuple(food), grid)
+        if not path:
+            continue
+        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]))
+        if foodtotail:
+            break
+
 
     assert path[0] == tuple(snek_head)
 
