@@ -9,15 +9,11 @@ FOOD = 3
 GOLD = 4
 
 def distance(p, q):
-    print p
-    print q
-    dx = p[0] - q[0]
-    dy = p[1] - q[1]
+    dx = abs(p[0] - q[0])
+    dy = abs(p[1] - q[1])
     return dx + dy;
 
 def closest(items, start):
-    print items
-    print start
     closest_item = None
     closest_distance = 10000
 
