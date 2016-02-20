@@ -108,7 +108,7 @@ def move():
     data = bottle.request.json
 
     snek, grid = build_grid(data)
-    closest_goal = closest(data["food"] + data["gold"])
+    closest_goal = closest(data["food"] + data["gold"],snek)
 
     return {
         'move': 'north',
