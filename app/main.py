@@ -132,7 +132,7 @@ def move():
         path = a_star(tuple(snek_head), tuple(food), grid)
         if not path:
             continue
-        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]))
+        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid)
         if foodtotail:
             break
 
