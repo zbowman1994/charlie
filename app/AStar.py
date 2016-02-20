@@ -33,9 +33,9 @@ def neighbours(node, grid):
     return result
 
 def a_star(start, goal, grid):
-    print start
-    print goal
-    printg(grid, 'input')
+    # print start
+    # print goal
+    # printg(grid, 'input')
 
     closed_set = []
     open_set   = [start]
@@ -44,18 +44,18 @@ def a_star(start, goal, grid):
     g_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     g_score[start[0]][start[1]] = 0
 
-    printg(g_score, 'g_score')
+    # printg(g_score, 'g_score')
 
     f_score = [[10000 for x in xrange(len(grid[y]))] for y in xrange(len(grid))]
     f_score[start[0]][start[1]] = dist(start,goal)
 
-    printg(f_score, 'f_score')
+    # printg(f_score, 'f_score')
 
     while(len(open_set) > 0):
         current = min(open_set, key=lambda p: f_score[p[0]][p[1]])
-        print 'current'
-        print current
-        print f_score[current[0]][current[1]]
+        # print 'current'
+        # print current
+        # print f_score[current[0]][current[1]]
 
         if (current == goal):
             return reconstruct_path(came_from, goal)
