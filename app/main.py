@@ -2,6 +2,11 @@ import bottle
 import os
 import numpy as np
 
+SNAKE = 1
+WALL = 2
+FOOD = 3
+GOLD = 4
+
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -67,15 +72,26 @@ def start():
 
 @bottle.post('/move')
 def move():
-    mysnake = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
+    mysnakeid = "de508402-17c8-4ac7-ab0b-f96cb53fbee8"
+    mysnake = []
+    previouspos = []
     data = bottle.request.json
+    grid = [[0 for col in range(data.width)] for row in data.height]
+    for snek in data.snakes:
+        if snek.id = mysnake:
+            mysnake = snek
+        for coord in snek.coords:
+            grid[coord[0]][coord[1]] = SNAKE
+    for wall in data.walls:
+        grid[wall[0]][wall[1]] = WALL
+    for g in data.gold:
+        grid[g[0]][g[1]] = GOLD
+    for f in data.food:
+        grid[f[0]][f[1]] = FOOD
     
-    i = np.random.randint(4)
-    # TODO: Do things with data
-    list = {0:'north',1:'east',2:'south',3:'west'}
-    i = (i+1)%4
+
     return {
-        'move': list[i],
+        'move': 'north',
         'taunt': 'TRAITOR!'
     }
 
