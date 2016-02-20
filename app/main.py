@@ -9,7 +9,7 @@ def static(path):
 
 @bottle.get('/')
 def index():
-    head_url = 'Traitor.gif' % (
+    head_url = '%s://%s/static/Traitor.gif' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
@@ -29,6 +29,41 @@ def start():
     return {
         'taunt': 'battlesnake-python!'
     }
+# DATA OBJECT
+# {
+#     "game": "hairy-cheese",
+#     "mode": "advanced",
+#     "turn": 4,
+#     "height": 20,
+#     "width": 30,
+#     "snakes": [
+#         <Snake Object>, <Snake Object>, ...
+#     ],
+#     "food": [
+#         [1, 2], [9, 3], ...
+#     ],
+#     "walls": [    // Advanced Only
+#         [2, 2]
+#     ],
+#     "gold": [     // Advanced Only
+#         [5, 5]
+#     ]
+# }
+
+#SNAKE
+# {
+#     "id": "1234-567890-123456-7890",
+#     "name": "Well Documented Snake",
+#     "status": "alive",
+#     "message": "Moved north",
+#     "taunt": "Let's rock!",
+#     "age": 56,
+#     "health": 83,
+#     "coords": [ [1, 1], [1, 2], [2, 2] ],
+#     "kills": 4,
+#     "food": 12,
+#     "gold": 2
+# }
 
 @bottle.post('/move')
 def move():
