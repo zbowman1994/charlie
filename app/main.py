@@ -125,6 +125,7 @@ def move():
 
     snek, grid = init(data)
     snek_head = snek['coords'][0]
+    snek_coords = snek['coords']
     closest_goal = closest(data['food'] + data['gold'], snek_head)
     path = None
     foods = sorted(data['food']+data['gold'],key = lambda p: distance(p,snek_head))
@@ -144,6 +145,10 @@ def move():
     assert path[0] == tuple(snek_head)
 
 
+<<<<<<< HEAD
+=======
+    path = a_star(tuple(snek_head), tuple(closest_goal), grid, snek_coords)
+>>>>>>> snek tial aboidnese
 
 
     return {
