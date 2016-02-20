@@ -144,11 +144,7 @@ def move():
 
     assert path[0] == tuple(snek_head)
 
-
-<<<<<<< HEAD
-=======
     path = a_star(tuple(snek_head), tuple(closest_goal), grid, snek_coords)
->>>>>>> snek tial aboidnese
 
 
     return {
