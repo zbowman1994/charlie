@@ -129,12 +129,15 @@ def move():
     path = None
     foods = sorted(data['food']+data['gold'],key = lambda p: distance(p,snek_head))
     for food in foods:
+        print food
         path = a_star(tuple(snek_head), tuple(food), grid)
         if not path:
+            print "no path to food"
             continue
         foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid)
         if foodtotail:
             break
+        print "no path to tail from food"
 
 
     assert path[0] == tuple(snek_head)
