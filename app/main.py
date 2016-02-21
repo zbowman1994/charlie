@@ -157,7 +157,8 @@ def move():
     snek_head = snek['coords'][0]
     snek_coords = snek['coords']
     path = None
-    foods = sorted(goals(data),key = lambda p: distance(p,snek_head))
+    foods = sorted(data['food'], key = lambda p: distance(p,snek_head))
+    foods = data['gold'] + foods
     for food in foods:
         #print food
         tentative_path = a_star(snek_head, food, grid, snek_coords)
