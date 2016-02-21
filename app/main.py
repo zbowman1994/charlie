@@ -137,7 +137,7 @@ def move():
     for enemy in data['snakes']:
         if (enemy['id'] == ID):
             continue
-        if dist(snek['coords'][0], enemy['coords'][0]) > 2:
+        if distance(snek['coords'][0], enemy['coords'][0]) > 2:
             continue
         if (len(enemy['coords']) > len(snek['coords'])-1):
             #dodge
