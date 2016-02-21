@@ -4,6 +4,7 @@ import copy
 import math
 import os
 
+SNEK_BUFFER = 3
 ID = 'de508402-17c8-4ac7-ab0b-f96cb53fbee8'
 SNAKE = 1
 WALL = 2
@@ -140,7 +141,7 @@ def move():
     for enemy in data['snakes']:
         if (enemy['id'] == ID):
             continue
-        if distance(snek['coords'][0], enemy['coords'][0]) > 2:
+        if distance(snek['coords'][0], enemy['coords'][0]) > SNEK_BUFFER:
             continue
         if (len(enemy['coords']) > len(snek['coords'])-1):
             #dodge
@@ -160,10 +161,10 @@ def move():
     path = None
     foods = sorted(goals(data),key = lambda p: distance(p,snek_head))
     for food in foods:
-        print food
+        #print food
         tentative_path = a_star(snek_head, food, grid, snek_coords)
         if not tentative_path:
-            print "no path to food"
+            #print "no path to food"
             continue
 
         path_length = len(tentative_path)
@@ -197,15 +198,15 @@ def move():
         for coord in new_snek_coords:
             new_grid[coord[0]][coord[1]] = SNAKE
 
-        printg(grid, 'orig')
-        printg(new_grid, 'new')
+        #printg(grid, 'orig')
+        #printg(new_grid, 'new')
 
-        print snek['coords'][-1]
+        #print snek['coords'][-1]
         foodtotail = a_star(food,new_snek_coords[-1],new_grid, new_snek_coords)
         if foodtotail:
             path = tentative_path
             break
-        print "no path to tail from food"
+        #print "no path to tail from food"
 
 
 
@@ -213,12 +214,16 @@ def move():
         path = a_star(snek_head, snek['coords'][-1], grid, snek_coords)
 
     if not path:
-        for neighbour : neighbours(snek_head,grid,0,snek_coords, [1,2,5]):
+        for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2,5]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
+            print 'i\'m scared'
+            break
 
     if not path:
-        for neighbour : neighbours(snek_head,grid,0,snek_coords, [1,2]):
+        for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
+            print 'lik so scared'
+            break
 
     if path:
         assert path[0] == tuple(snek_head)
