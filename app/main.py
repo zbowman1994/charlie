@@ -213,13 +213,18 @@ def move():
     if not path:
         path = a_star(snek_head, snek['coords'][-1], grid, snek_coords)
 
-    if not path:
+    despair = not (path and len(path) > 1)
+
+    if despair:
         for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2,5]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
             print 'i\'m scared'
             break
 
-    if not path:
+    despair = not (path and len(path) > 1)
+
+
+    if despair:
         for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
             print 'lik so scared'
