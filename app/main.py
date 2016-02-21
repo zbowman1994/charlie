@@ -9,6 +9,12 @@ WALL = 2
 FOOD = 3
 GOLD = 4
 
+def goals(data):
+    result = data['food']
+    if data['mode'] == 'advanced':
+        result.extend(data['gold'])
+    return result
+
 def direction(from_cell, to_cell):
     dx = to_cell[0] - from_cell[0]
     dy = to_cell[1] - from_cell[1]
@@ -126,25 +132,26 @@ def move():
     snek, grid = init(data)
     snek_head = snek['coords'][0]
     snek_coords = snek['coords']
-    closest_goal = closest(data['food'] + data['gold'], snek_head)
     path = None
-    foods = sorted(data['food']+data['gold'],key = lambda p: distance(p,snek_head))
+    foods = sorted(goals(data),key = lambda p: distance(p,snek_head))
     for food in foods:
         print food
-        path = a_star(tuple(snek_head), tuple(food), grid)
+        tentative_path = a_star(tuple(snek_head), tuple(food), grid, snek_coords)
         if not path:
             print "no path to food"
             continue
         print snek['coords'][-1]
-        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid)
+        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid, snek_coords)
         if foodtotail:
+            path = tentative_path
             break
         print "no path to tail from food"
 
 
-    assert path[0] == tuple(snek_head)
-
-    path = a_star(tuple(snek_head), tuple(closest_goal), grid, snek_coords)
+    if path:
+        assert path[0] == tuple(snek_head)
+    else:
+        'no path found'
 
 
     return {
