@@ -49,7 +49,7 @@ def closest(items, start):
     return closest_item
 
 def init(data):
-    grid = [[0 for col in xrange(data['width'])] for row in xrange(data['height'])]
+    grid = [[0 for col in xrange(data['height'])] for row in xrange(data['width'])]
     for snek in data['snakes']:
         if snek['id']== ID:
             mysnake = snek
@@ -143,12 +143,12 @@ def move():
             continue
         if (len(enemy['coords']) > len(snek['coords'])-1):
             #dodge
-            if enemy['coords'][0][1] < data['width']-1:
+            if enemy['coords'][0][1] < data['height']-1:
                 grid[enemy['coords'][0][0]][enemy['coords'][0][1]+1] = SAFTEY
             if enemy['coords'][0][1] > 0:
                 grid[enemy['coords'][0][0]][enemy['coords'][0][1]-1] = SAFTEY
 
-            if enemy['coords'][0][0] < data['height']-1:
+            if enemy['coords'][0][0] < data['width']-1:
                 grid[enemy['coords'][0][0]+1][enemy['coords'][0][1]] = SAFTEY
             if enemy['coords'][0][0] > 0:
                 grid[enemy['coords'][0][0]-1][enemy['coords'][0][1]] = SAFTEY
@@ -216,7 +216,7 @@ def move():
     if despair:
         for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2,5]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
-            print 'i\'m scared'
+            #print 'i\'m scared'
             break
 
     despair = not (path and len(path) > 1)
@@ -225,7 +225,7 @@ def move():
     if despair:
         for neighbour in neighbours(snek_head,grid,0,snek_coords, [1,2]):
             path = a_star(snek_head, neighbour, grid, snek_coords)
-            print 'lik so scared'
+            #print 'lik so scared'
             break
 
     if path:
