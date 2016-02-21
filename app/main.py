@@ -133,8 +133,6 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-
-
     snek, grid = init(data)
 
     #foreach snake
@@ -232,6 +230,7 @@ def move():
 
     if path:
         assert path[0] == tuple(snek_head)
+        assert len(path) > 1
 
     return {
         'move': direction(path[0], path[1]),
