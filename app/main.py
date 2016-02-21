@@ -1,5 +1,6 @@
-from AStar import a_star
+from AStar import a_star, printg
 import bottle
+import copy
 import math
 import os
 
@@ -140,8 +141,31 @@ def move():
         if not tentative_path:
             print "no path to food"
             continue
+
+        path_length = len(tentative_path)
+        snek_length = len(snek_coords)
+
+
+        # Update snek
+        if path_length < snek_length:
+            remainder = snek_length - path_length
+            new_snek_coords = list(reversed(tentative_path)) + snek_coords[:remainder]
+        else:
+            new_snek_coords = list(reversed(tentative_path))[:snek_length]
+
+        # Create a new grid with the updates snek positions
+        new_grid = copy.deepcopy(grid)
+
+        for coord in snek_coords:
+            new_grid[coord[0]][coord[1]] = 0
+        for coord in new_snek_coords:
+            new_grid[coord[0]][coord[1]] = SNAKE
+
+        printg(grid, 'orig')
+        printg(new_grid, 'new')
+
         print snek['coords'][-1]
-        foodtotail = a_star(food,snek['coords'][-1],grid, snek_coords)
+        foodtotail = a_star(food,new_snek_coords[-1],new_grid, new_snek_coords)
         if foodtotail:
             path = tentative_path
             break
