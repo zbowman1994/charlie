@@ -24,7 +24,7 @@ def neighbours(node, grid, score, tail):
     if score >= len(tail):
         subtail = [tuple(x) for x in tail]
     else:
-        subtail = [tuple(x) for x in tail[len(tail)-score-1:]]
+        subtail = [tuple(x) for x in tail[len(tail)-score:]]
 
     result = []
     if (node[0] > 0):

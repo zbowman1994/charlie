@@ -136,23 +136,23 @@ def move():
     foods = sorted(goals(data),key = lambda p: distance(p,snek_head))
     for food in foods:
         print food
-        tentative_path = a_star(tuple(snek_head), tuple(food), grid, snek_coords)
-        if not path:
+        tentative_path = a_star(snek_head, food, grid, snek_coords)
+        if not tentative_path:
             print "no path to food"
             continue
         print snek['coords'][-1]
-        foodtotail = a_star(tuple(food),tuple(snek['coords'][-1]),grid, snek_coords)
+        foodtotail = a_star(food,snek['coords'][-1],grid, snek_coords)
         if foodtotail:
             path = tentative_path
             break
         print "no path to tail from food"
 
 
+    if not path:
+        path = a_star(snek_head, snek['coords'][-1], grid, snek_coords)
+
     if path:
         assert path[0] == tuple(snek_head)
-    else:
-        'no path found'
-
 
     return {
         'move': direction(path[0], path[1]),
