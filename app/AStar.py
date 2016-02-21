@@ -16,7 +16,7 @@ def reconstruct_path(came_from, current):
         total_path.append(current)
     return list(reversed(total_path))
 
-def neighbours(node, grid, score, tail):
+def neighbours(node, grid, score, tail, ignore_list):
     width = len(grid)
     height = len(grid[0])
 
@@ -36,7 +36,7 @@ def neighbours(node, grid, score, tail):
     if (node[1] < height-1):
         result.append((node[0],node[1]+1))
 
-    result = filter(lambda p: (grid[p[0]][p[1]] not in [1,2]) or (p in subtail), result)
+    result = filter(lambda p: (grid[p[0]][p[1]] not in ignore_list) or (p in subtail), result)
 
     return result
 
@@ -63,7 +63,7 @@ def a_star(start, goal, grid, tail):
         open_set.remove(current)
         closed_set.append(current)
 
-        for neighbour in neighbours(current, grid, g_score[current[0]][current[1]], tail):
+        for neighbour in neighbours(current, grid, g_score[current[0]][current[1]], tail,[1,2,5]):
             if neighbour in closed_set:
                 continue
             tentative_g_score = g_score[current[0]][current[1]] + dist(current,neighbour)
