@@ -130,7 +130,28 @@ def start():
 def move():
     data = bottle.request.json
 
+
     snek, grid = init(data)
+
+    #foreach snake
+    for enemy in data['snakes']:
+        if (enemy['id'] == ID):
+            continue
+        if dist(snek['coords'][0], enemy['coords'][0]) > 2:
+            continue
+        if (len(enemy['coords']) > len(snek['coords'])-1):
+            #dodge
+            if enemy['coords'][0][1] < data['width']-1:
+                grid[enemy['coords'][0][0]][enemy['coords'][0][1]+1] = SNAKE
+            if enemy['coords'][0][1] > 0:
+                grid[enemy['coords'][0][0]][enemy['coords'][0][1]-1] = SNAKE
+
+            if enemy['coords'][0][0] < data['height']-1:
+                grid[enemy['coords'][0][0]+1][enemy['coords'][0][1]] = SNAKE
+            if enemy['coords'][0][0] > 0:
+                grid[enemy['coords'][0][0]-1][enemy['coords'][0][1]] = SNAKE
+
+
     snek_head = snek['coords'][0]
     snek_coords = snek['coords']
     path = None
