@@ -54,10 +54,13 @@ def init(data):
             mysnake = snek
         for coord in snek['coords']:
             grid[coord[0]][coord[1]] = SNAKE
-    for wall in data['walls']:
-        grid[wall[0]][wall[1]] = WALL
-    for g in data['gold']:
-        grid[g[0]][g[1]] = GOLD
+
+    if data['mode'] == 'advanced':
+        for wall in data['walls']:
+            grid[wall[0]][wall[1]] = WALL
+        for g in data['gold']:
+            grid[g[0]][g[1]] = GOLD
+
     for f in data['food']:
         grid[f[0]][f[1]] = FOOD
 
@@ -164,7 +167,7 @@ def move():
             continue
 
         path_length = len(tentative_path)
-        snek_length = len(snek_coords)
+        snek_length = len(snek_coords) + 1
 
 
         # Update snek
@@ -173,6 +176,10 @@ def move():
             new_snek_coords = list(reversed(tentative_path)) + snek_coords[:remainder]
         else:
             new_snek_coords = list(reversed(tentative_path))[:snek_length]
+
+        if grid[new_snek_coords[0][0]][new_snek_coords[0][1]] == FOOD:
+            # we ate food so we grow
+            new_snek_coords.append(new_snek_coords[-1])
 
         # Create a new grid with the updates snek positions
         new_grid = copy.deepcopy(grid)
